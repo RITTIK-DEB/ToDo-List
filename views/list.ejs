@@ -1,0 +1,29 @@
+<%- include("index") -%>
+<link rel="stylesheet" href="style.css">
+<div class="content" style="background-image:url(https://media.istockphoto.com/vectors/business-office-work-and-task-management-concept-vector-flat-person-vector-id1208534790)">
+
+    <h1 class="listheading" name="listhead" value="<%= listhead %>">Your <%=listhead%> list</h1>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: <%= prog %>%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Your Progress <%= prog %>%</div>
+      </div>
+      
+      <ul class="row list-group">
+        
+        <% for(const ele of lists){ %>
+            <% for(const el of ele.items){ %>
+            <li class="list-group-item col-lg-6 col-md-8 col-sm-12">
+                <form method="post" action="/delete">  
+                    <input class="form-check-input me-1" type="checkbox" value="<%=el._id%>" name="checkname" aria-label="<%=el %>" onchange="this.form.submit()"><%=el.name %>
+                    <input type="hidden" name="checkedlist" value="<%= listhead %>"></input>
+                </form>
+            </li>  
+            <% } %>
+        <% } %>
+    </ul>
+<form action="/add" method="post">
+<input class="inpt" type="text" name="value" placeholder="What Will We Are Gonna Do">
+
+<button class="btn btn-primary" type="submit" value="<%= listhead %>" name="buttonval">Add To checkList</button>
+</form>
+</div>
+
